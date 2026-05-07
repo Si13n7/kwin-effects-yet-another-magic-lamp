@@ -22,6 +22,9 @@
 // Auto-generated
 #include "YetAnotherMagicLampConfig.h"
 
+// kwineffects
+#include <core/renderviewport.h>
+
 // std
 #include <cmath>
 
@@ -158,7 +161,8 @@ void YetAnotherMagicLampEffect::paintWindow(const KWin::RenderTarget& renderTarg
 {
     auto it = m_animations.constFind(w);
     if (it != m_animations.constEnd() && it->model.needsClip()) {
-        const KWin::Region clip(it->model.clipRegion());
+        const KWin::Region clipLogical(it->model.clipRegion());
+        const KWin::Region clip = viewport.mapToDeviceCoordinatesAligned(clipLogical);
         KWin::effects->paintWindow(renderTarget, viewport, w, mask, clip, data);
         return;
     }
