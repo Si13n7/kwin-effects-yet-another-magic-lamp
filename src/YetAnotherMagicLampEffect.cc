@@ -141,6 +141,14 @@ void YetAnotherMagicLampEffect::prePaintScreen(KWin::ScreenPrePaintData& data, s
     KWin::effects->prePaintScreen(data, presentTime);
 }
 
+void YetAnotherMagicLampEffect::prePaintWindow(KWin::RenderView* view, KWin::EffectWindow* w, KWin::WindowPrePaintData& data, std::chrono::milliseconds presentTime)
+{
+    if (m_animations.contains(w)) {
+        data.mask |= PAINT_WINDOW_TRANSFORMED;
+    }
+    KWin::effects->prePaintWindow(view, w, data, presentTime);
+}
+
 void YetAnotherMagicLampEffect::postPaintScreen()
 {
     for (auto it = m_animations.begin(); it != m_animations.end();) {
