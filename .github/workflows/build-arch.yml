@@ -1,0 +1,30 @@
+name: Build (Arch Linux)
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+
+    steps:
+      - name: Update system
+        run: pacman -Syu --noconfirm
+
+      - name: Install dependencies
+        run: pacman -S --noconfirm --needed
+          cmake extra-cmake-modules kwin qt6-base kcmutils
+          kconfig kconfigwidgets kcoreaddons kwindowsystem libdrm
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+
+      - name: Build
+        run: cmake --build build --parallel
