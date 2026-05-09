@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ubuntu:25.04
+    container: ubuntu:rolling
 
     steps:
       - name: Update system
