@@ -1,4 +1,4 @@
-# Yet Another Magic Lamp
+# Yet Another Magic Lamp (Plasma 6.6+)
 
 ![Screenshot](doc/Screenshot.png)
 
@@ -33,27 +33,27 @@ You will need the following dependencies to build this effect:
     - WindowSystem
 * libdrm
 
-On Arch Linux
+On Arch Linux → Manjaro, EndeavourOS, Garuda Linux, CachyOS
 
-```sh
+```yaml
 sudo pacman -S base-devel cmake extra-cmake-modules kwin qt6-base \
     kcmutils kconfig kconfigwidgets kcoreaddons kwindowsystem libdrm
 ```
 
-On Fedora
+On Fedora → Kinoite, Bazzite, Nobara
 
-```sh
+```yaml
 sudo dnf install cmake extra-cmake-modules kf6-kconfig-devel \
     kf6-kconfigwidgets-devel kf6-kcoreaddons-devel kf6-kcmutils-devel \
     kf6-kwindowsystem-devel kwin-devel qt6-qtbase-devel libdrm-devel libepoxy-devel
 ```
 
-On Debian
+On Debian → Kubuntu, KDE neon, MX Linux, Nitrux
 
 > **Note:** This effect requires KWin 6.6 or later. Building on Debian-based distributions may
 > fail if the KWin version available in the repositories does not meet this requirement.
 
-```sh
+```yaml
 sudo apt install build-essential cmake extra-cmake-modules kwin-dev \
     libkf6config-dev libkf6configwidgets-dev libkf6coreaddons-dev \
     libkf6kcmutils-dev libkf6windowsystem-dev qt6-base-dev libdrm-dev
@@ -62,7 +62,7 @@ sudo apt install build-essential cmake extra-cmake-modules kwin-dev \
 After you installed all the required dependencies, you can build
 the effect:
 
-```sh
+```yaml
 git clone https://github.com/Si13n7/kwin-effects-yet-another-magic-lamp.git
 cd kwin-effects-yet-another-magic-lamp
 mkdir build && cd build
@@ -79,7 +79,7 @@ sudo make install
 If you want to build this effect against an older Plasma (5.x) release, checkout
 the corresponding `Plasma/x.yz` branch, for example
 
-```sh
+```yaml
 git clone https://github.com/zzag/kwin-effects-yet-another-magic-lamp.git
 cd kwin-effects-yet-another-magic-lamp
 git checkout Plasma/5.23
