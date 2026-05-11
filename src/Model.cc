@@ -53,10 +53,12 @@ static Direction realizeDirection(const KWin::EffectWindow* window, const QRectF
         const QRectF windowScreen = KWin::effects->clientArea(KWin::ScreenArea, window);
         if (panel->frameGeometry().width() >= panel->frameGeometry().height()) {
             return iconRect.center().y() <= windowScreen.center().y()
-                ? Direction::Top : Direction::Bottom;
+                ? Direction::Top
+                : Direction::Bottom;
         } else {
             return iconRect.center().x() <= windowScreen.center().x()
-                ? Direction::Left : Direction::Right;
+                ? Direction::Left
+                : Direction::Right;
         }
     }
 
@@ -67,12 +69,15 @@ static Direction realizeDirection(const KWin::EffectWindow* window, const QRectF
     const QPointF c = iconRect.center();
     const qreal l = qAbs(c.x() - screenRect.left());
     const qreal t = qAbs(c.y() - screenRect.top());
-    const qreal r = qAbs(screenRect.right()  - c.x());
+    const qreal r = qAbs(screenRect.right() - c.x());
     const qreal b = qAbs(screenRect.bottom() - c.y());
     const qreal m = qMin(qMin(l, t), qMin(r, b));
-    if (qFuzzyCompare(l, m)) return Direction::Left;
-    if (qFuzzyCompare(t, m)) return Direction::Top;
-    if (qFuzzyCompare(r, m)) return Direction::Right;
+    if (qFuzzyCompare(l, m))
+        return Direction::Left;
+    if (qFuzzyCompare(t, m))
+        return Direction::Top;
+    if (qFuzzyCompare(r, m))
+        return Direction::Right;
     return Direction::Bottom;
 }
 

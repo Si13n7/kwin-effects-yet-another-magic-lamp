@@ -19,8 +19,9 @@
 #include "YetAnotherMagicLampEffect.h"
 
 KWIN_EFFECT_FACTORY_SUPPORTED_ENABLED(YetAnotherMagicLampEffect,
-                                      "metadata.json",
-                                      return YetAnotherMagicLampEffect::supported();,
-                                      return false;)
+    "metadata.json",
+    return YetAnotherMagicLampEffect::supported();
+    ,
+    return false;)
 
 #include "plugin.moc"

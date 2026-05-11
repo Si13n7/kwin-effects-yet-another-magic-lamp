@@ -32,7 +32,6 @@
 // std
 #include <cmath>
 
-
 // Returns which screen edge a dock panel is closest to.
 static Direction dockEdge(KWin::EffectWindow* dock)
 {
@@ -45,13 +44,16 @@ static Direction dockEdge(KWin::EffectWindow* dock)
 
     const qreal l = qAbs(c.x() - screenRect.left());
     const qreal t = qAbs(c.y() - screenRect.top());
-    const qreal r = qAbs(screenRect.right()  - c.x());
+    const qreal r = qAbs(screenRect.right() - c.x());
     const qreal b = qAbs(screenRect.bottom() - c.y());
     const qreal m = qMin(qMin(l, t), qMin(r, b));
 
-    if (qFuzzyCompare(l, m)) return Direction::Left;
-    if (qFuzzyCompare(t, m)) return Direction::Top;
-    if (qFuzzyCompare(r, m)) return Direction::Right;
+    if (qFuzzyCompare(l, m))
+        return Direction::Left;
+    if (qFuzzyCompare(t, m))
+        return Direction::Top;
+    if (qFuzzyCompare(r, m))
+        return Direction::Right;
     return Direction::Bottom;
 }
 
@@ -131,25 +133,32 @@ static QRectF resolveIconGeometry(KWin::EffectWindow* w)
         const auto closestEdge = [](const QRectF& rect, const QPointF& p) -> Direction {
             const qreal l = qAbs(p.x() - rect.left());
             const qreal t = qAbs(p.y() - rect.top());
-            const qreal r = qAbs(rect.right()  - p.x());
+            const qreal r = qAbs(rect.right() - p.x());
             const qreal b = qAbs(rect.bottom() - p.y());
             const qreal m = qMin(qMin(l, t), qMin(r, b));
-            if (qFuzzyCompare(l, m)) return Direction::Left;
-            if (qFuzzyCompare(t, m)) return Direction::Top;
-            if (qFuzzyCompare(r, m)) return Direction::Right;
+            if (qFuzzyCompare(l, m))
+                return Direction::Left;
+            if (qFuzzyCompare(t, m))
+                return Direction::Top;
+            if (qFuzzyCompare(r, m))
+                return Direction::Right;
             return Direction::Bottom;
         };
         const auto opposite = [](Direction d) -> Direction {
             switch (d) {
-            case Direction::Top:    return Direction::Bottom;
-            case Direction::Bottom: return Direction::Top;
-            case Direction::Left:   return Direction::Right;
-            default:                return Direction::Left;
+            case Direction::Top:
+                return Direction::Bottom;
+            case Direction::Bottom:
+                return Direction::Top;
+            case Direction::Left:
+                return Direction::Right;
+            default:
+                return Direction::Left;
             }
         };
 
-        const Direction srcFacingEdge  = closestEdge(srcRect, tgtRect.center());
-        const Direction tgtFacingEdge  = closestEdge(tgtRect, srcRect.center());
+        const Direction srcFacingEdge = closestEdge(srcRect, tgtRect.center());
+        const Direction tgtFacingEdge = closestEdge(tgtRect, srcRect.center());
         const Direction sourceDockEdge = dockEdge(sourceDock);
         preferredEdge = (sourceDockEdge == srcFacingEdge) ? tgtFacingEdge : opposite(tgtFacingEdge);
     }
@@ -185,8 +194,8 @@ static QRectF resolveIconGeometry(KWin::EffectWindow* w)
     if (!sourceDock) {
         const QRectF tgt = targetDock->frameGeometry();
         return QRectF(tgt.center().x() - iconRect.width() / 2,
-                      tgt.center().y() - iconRect.height() / 2,
-                      iconRect.width(), iconRect.height());
+            tgt.center().y() - iconRect.height() / 2,
+            iconRect.width(), iconRect.height());
     }
 
     KWin::VirtualDesktop* desktop = KWin::effects->currentDesktop();
@@ -202,14 +211,14 @@ static QRectF resolveIconGeometry(KWin::EffectWindow* w)
 
     // Clamp to the target dock so the icon stays within the panel.
     const QRectF tgt = targetDock->frameGeometry();
-    const qreal cx = qBound(tgt.left() + iconRect.width()  / 2,
-                            translatedRect.center().x(),
-                            tgt.right()  - iconRect.width()  / 2);
-    const qreal cy = qBound(tgt.top()  + iconRect.height() / 2,
-                            translatedRect.center().y(),
-                            tgt.bottom() - iconRect.height() / 2);
+    const qreal cx = qBound(tgt.left() + iconRect.width() / 2,
+        translatedRect.center().x(),
+        tgt.right() - iconRect.width() / 2);
+    const qreal cy = qBound(tgt.top() + iconRect.height() / 2,
+        translatedRect.center().y(),
+        tgt.bottom() - iconRect.height() / 2);
     return QRectF(cx - iconRect.width() / 2, cy - iconRect.height() / 2,
-                  iconRect.width(), iconRect.height());
+        iconRect.width(), iconRect.height());
 }
 
 enum ShapeCurve {
@@ -228,7 +237,7 @@ YetAnotherMagicLampEffect::YetAnotherMagicLampEffect()
 {
     reconfigure(ReconfigureAll);
 
-    for (KWin::EffectWindow *w : KWin::effects->stackingOrder()) {
+    for (KWin::EffectWindow* w : KWin::effects->stackingOrder()) {
         slotWindowAdded(w);
     }
 
@@ -346,10 +355,10 @@ void YetAnotherMagicLampEffect::postPaintScreen()
 }
 
 void YetAnotherMagicLampEffect::paintWindow(const KWin::RenderTarget& renderTarget,
-                                             const KWin::RenderViewport& viewport,
-                                             KWin::EffectWindow* w, int mask,
-                                             const KWin::Region& region,
-                                             KWin::WindowPaintData& data)
+    const KWin::RenderViewport& viewport,
+    KWin::EffectWindow* w, int mask,
+    const KWin::Region& region,
+    KWin::WindowPaintData& data)
 {
     auto it = m_animations.constFind(w);
     if (it != m_animations.constEnd() && it->model.needsClip()) {
