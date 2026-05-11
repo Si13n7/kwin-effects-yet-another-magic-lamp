@@ -36,16 +36,54 @@ You will need the following dependencies to build this effect:
 On Arch Linux → Manjaro, EndeavourOS, Garuda Linux, CachyOS
 
 ```yaml
-sudo pacman -S base-devel cmake extra-cmake-modules kwin qt6-base \
-    kcmutils kconfig kconfigwidgets kcoreaddons kwindowsystem libdrm
+sudo pacman -S \
+    base-devel \
+    cmake \
+    extra-cmake-modules \
+    kwin \
+    kconfig \
+    kconfigwidgets \
+    kcmutils \
+    kcoreaddons \
+    kwindowsystem \
+    qt6-base \
+    libdrm
 ```
 
 On Fedora → Kinoite, Bazzite, Nobara
 
 ```yaml
-sudo dnf install cmake extra-cmake-modules kf6-kconfig-devel \
-    kf6-kconfigwidgets-devel kf6-kcoreaddons-devel kf6-kcmutils-devel \
-    kf6-kwindowsystem-devel kwin-devel qt6-qtbase-devel libdrm-devel libepoxy-devel
+sudo dnf install \
+    cmake \
+    extra-cmake-modules \
+    kwin-devel \
+    kf6-kconfig-devel \
+    kf6-kconfigwidgets-devel \
+    kf6-kcmutils-devel \
+    kf6-kcoreaddons-devel \
+    kf6-kwindowsystem-devel \
+    qt6-qtbase-devel \
+    libdrm-devel \
+    libepoxy-devel
+```
+
+On openSUSE Tumbleweed
+
+```yaml
+sudo zypper install \
+    gcc-c++ \
+    cmake \
+    kf6-extra-cmake-modules \
+    kwin6-devel \
+    kf6-kconfig-devel \
+    kf6-kconfigwidgets-devel \
+    kf6-kcmutils-devel \
+    kf6-kcoreaddons-devel \
+    kf6-kwindowsystem-devel \
+    qt6-base-devel \
+    qt6-declarative-devel \
+    libdrm-devel \
+    libepoxy-devel
 ```
 
 On Debian → Kubuntu, KDE neon, MX Linux, Nitrux
@@ -54,9 +92,18 @@ On Debian → Kubuntu, KDE neon, MX Linux, Nitrux
 > fail if the KWin version available in the repositories does not meet this requirement.
 
 ```yaml
-sudo apt install build-essential cmake extra-cmake-modules kwin-dev \
-    libkf6config-dev libkf6configwidgets-dev libkf6coreaddons-dev \
-    libkf6kcmutils-dev libkf6windowsystem-dev qt6-base-dev libdrm-dev
+sudo apt install \
+    build-essential \
+    cmake \
+    extra-cmake-modules \
+    kwin-dev \
+    libkf6config-dev \
+    libkf6configwidgets-dev \
+    libkf6coreaddons-dev \
+    libkf6kcmutils-dev \
+    libkf6windowsystem-dev \
+    qt6-base-dev \
+    libdrm-dev
 ```
 
 After you installed all the required dependencies, you can build
